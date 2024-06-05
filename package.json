@@ -1,0 +1,12 @@
+{
+  "name": "commongood",
+  "version": "1.0.0",
+  "description": "React app to show the state of commonGood products",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
