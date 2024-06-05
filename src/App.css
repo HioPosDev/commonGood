@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+.app-container {
+  border: 2px solid white;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
