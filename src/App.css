@@ -38,7 +38,19 @@
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 2em;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 2px solid white;
+  margin-top: 1vh;
+  width: 100%;
 }
 
 .read-the-docs {

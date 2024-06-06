@@ -1,6 +1,7 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import NotificationComponent from './components/notification-component/notification.component'
 
 function App() {
 
@@ -25,28 +26,22 @@ function App() {
 
   return (
     <div className='app-container'>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>Common Good</h1>
+      <h2>Mesa 1</h2>
       <div className="card">
         {arrayValues.map(({name, state}) => {
           return (
             <div className='article'>
-              <p>Name: {name}</p>
-              <p>State: {state}</p>
+              <span>Name: {name}</span>
+              <span>State: {state}</span>
             </div>
           )
         })}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <NotificationComponent />
+      <footer className="read-the-docs">
+        Developed by HioPos Cloudservices
+      </footer>
     </div>
   )
 }
