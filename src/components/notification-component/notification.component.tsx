@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 const NotificationComponent: React.FC = () => {
 
-    const [state, setState] = useState(false)
 
   useEffect(() => {
     if ('Notification' in window) {
@@ -34,13 +33,6 @@ const NotificationComponent: React.FC = () => {
     //   });
     // }
 
-    if (state) {
-        console.log('PEREE');
-        
-        showNotification('Order Ready', {
-          body: `Your product is ready!`,
-        });
-      }
   };
 
   // Use setInterval to periodically check the product status
