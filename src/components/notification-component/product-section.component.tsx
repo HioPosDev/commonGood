@@ -18,7 +18,7 @@ const ProductSection = () => {
 
   const handleAccederProductos = () => {
     // navigator.vibrate([800, 200, 800]); // Iniciar la vibración al acceder al apartado de productos
-    setTimeout(() => setProductsReady(true), 10000);
+    setTimeout(() => setProductsReady(true), 30000);
     setVibracionActiva(true);
   };
 
