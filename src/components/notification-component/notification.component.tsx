@@ -38,6 +38,11 @@ const NotificationComponent = () => {
     }
   };
 
+  setTimeout(() => {
+    triggerVibration();
+  }, 10000);
+  
+
   return (
     <div>
       <button onClick={askNotificationPermission}>Pedir Permiso</button>
