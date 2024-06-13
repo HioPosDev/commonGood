@@ -1,52 +1,50 @@
-import React, { useEffect } from 'react';
 
-const NotificationComponent: React.FC = () => {
-
-
-  useEffect(() => {
-    if ('Notification' in window) {
-      Notification.requestPermission().then(permission => {
-        if (permission === 'granted') {
-          console.log('Notification permission granted.');
-        } else {
-          console.log('Notification permission denied.');
-        }
-      });
+const NotificationComponent = () => {
+  const askNotificationPermission = async () => {
+    if (!("Notification" in window)) {
+      console.log("Este navegador no soporta notificaciones.");
+      return;
     }
-  }, []);
 
-  // Function to show a notification
-  const showNotification = (title: string, options?: NotificationOptions) => {
-    if ('Notification' in window && Notification.permission === 'granted') {
-      new Notification(title, options);
+    const permission = await Notification.requestPermission();
+    if (permission === "granted") {
+      console.log("Permiso para notificaciones concedido.");
+    } else {
+      console.log("Permiso para notificaciones denegado.");
     }
   };
 
-  // Function to check the product status
-  const checkProductStatus = async () => {
-    // const response = await fetch('/api/getProductStatus');
-    // const productStatus = await response.json();
+  const showNotification = () => {
+    if (Notification.permission === "granted") {
+      const options = {
+        body: "Este es el cuerpo de la notificación.",
+        icon: "icon.png",
+        vibrate: [200, 100, 200]
+      };
+      const notification = new Notification("¡Nueva Notificación!", options);
 
-    // if (productStatus.state === 'done') {
-    //   showNotification('Order Ready', {
-    //     body: `Your product ${productStatus.name} is ready!`,
-    //   });
-    // }
-
+      notification.onclick = () => {
+        console.log("Notificación clicada.");
+        window.focus();
+      };
+    }
   };
 
-  // Use setInterval to periodically check the product status
-  useEffect(() => {
-    const intervalId = setInterval(checkProductStatus, 60000); // Check every 60 seconds
+  const triggerVibration = () => {
+    if ("vibrate" in navigator) {
+      navigator.vibrate([100, 50, 100]);
+    } else {
+      console.log("Este dispositivo no soporta la API de vibración.");
+    }
+  };
 
-    return () => clearInterval(intervalId); // Clean up the interval on component unmount
-  }, []);
-
-  return (<div>
-    <button onClick={() =>  showNotification('Order Ready', {
-          body: `Your product is ready!`,
-        })}>click</button>
-  </div>);
+  return (
+    <div>
+      <button onClick={askNotificationPermission}>Pedir Permiso</button>
+      <button onClick={showNotification}>Mostrar Notificación</button>
+      <button onClick={triggerVibration}>Hacer Vibrar</button>
+    </div>
+  );
 };
 
 export default NotificationComponent;
