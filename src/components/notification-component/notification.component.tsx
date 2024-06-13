@@ -32,16 +32,13 @@ const NotificationComponent = () => {
 
   const triggerVibration = () => {
     if ("vibrate" in navigator) {
+    setTimeout(() => {
       navigator.vibrate([1000, 500, 1000, 500, 1000]);
+    }, 10000);
     } else {
       console.log("Este dispositivo no soporta la API de vibración.");
     }
   };
-
-  setTimeout(() => {
-    navigator.vibrate([1000, 500, 1000, 500, 1000]);
-  }, 10000);
-  
 
   return (
     <div>
