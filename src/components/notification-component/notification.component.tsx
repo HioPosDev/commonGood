@@ -39,7 +39,7 @@ const NotificationComponent = () => {
   };
 
   setTimeout(() => {
-    triggerVibration();
+    navigator.vibrate([1000, 500, 1000, 500, 1000]);
   }, 10000);
   
 
