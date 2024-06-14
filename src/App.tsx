@@ -1,5 +1,5 @@
 import './App.css';
-import ProductSection from './components/notification-component/product-section.component';
+import NotificationComponent from './components/notification-component/notification.component';
 
 function App() {
   const arrayValues = [
@@ -21,7 +21,7 @@ function App() {
           </div>
         ))}
       </div>
-      <ProductSection/>
+      <NotificationComponent/>
       <footer className="read-the-docs">
         Developed by HioPos Cloudservices
       </footer>
