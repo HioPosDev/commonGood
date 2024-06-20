@@ -9,7 +9,7 @@ const NotificationComponent: React.FC = () => {
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
-      const swPath = './sw.js';
+      const swPath = '/sw.js';
       navigator.serviceWorker.register(swPath)
         .then(registration => {
           setRegist(registration)
