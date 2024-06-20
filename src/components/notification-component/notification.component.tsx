@@ -3,47 +3,23 @@ import React, { useEffect, useState } from 'react';
 const publicVapidKey = 'BI2Msr9HxqB9M4fU60Hwcmq2XoaJymfNQ2OAvVQ86XLag1bgzgFEreJNGLZ6PNwRTyzNCVAOrjn9gnZSJH6Pmtg';
 
 const NotificationComponent: React.FC = () => {
-  const [regist, setRegist] = useState<ServiceWorkerRegistration | null>(null);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [regist, setRegist] = useState<any>();
 
   useEffect(() => {
-    const registerServiceWorker = async () => {
-      try {
-        const swPath = await findServiceWorkerPath(); // Función para buscar la ruta del Service Worker
-        if (swPath) {
-          const registration = await navigator.serviceWorker.register(swPath);
-          setRegist(registration);
-          console.log('Service Worker registrado:', registration);
-        } else {
-          console.error('No se encontró el Service Worker.');
-        }
-      } catch (error) {
-        console.error('Error al registrar el Service Worker:', error);
-      }
-    };
-
     if ('serviceWorker' in navigator) {
-      registerServiceWorker();
-    } else {
-      console.warn('Service Worker no está soportado en este navegador.');
+      const swPath = '/sw';
+      navigator.serviceWorker.register(swPath)
+        .then(registration => {
+          setRegist(registration)
+          console.log('Service Worker registrado:', registration);
+        })
+        .catch(error => {
+          console.error('Error al registrar el Service Worker:', error);
+        });
     }
   }, []);
-
-  const findServiceWorkerPath = async (): Promise<string | null> => {
-    // Lógica para buscar la ruta del Service Worker dinámicamente
-    const possiblePaths = ['./sw.js', '/sw.js', '/path/to/sw.js']; // Agrega las rutas que desees probar
-
-    for (const path of possiblePaths) {
-      try {
-        await fetch(path);
-        console.log(`Archivo encontrado en la ruta ${path}`);
-        return path;
-      } catch (error) {
-        console.warn(`No se encontró el archivo en la ruta ${path}`);
-      }
-    }
-
-    return null;
-  };
 
   const urlBase64ToUint8Array = (base64String: string): Uint8Array => {
     const padding = '='.repeat((4 - base64String.length % 4) % 4);
@@ -64,12 +40,10 @@ const NotificationComponent: React.FC = () => {
       return;
     }
 
-    if (!regist) {
-      console.warn('Service Worker no registrado aún.');
-      return;
-    }
-
     try {
+      // const registration = await navigator.serviceWorker.ready;
+      console.log('HELLOOO 2!');
+
       const subscription = await regist.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
