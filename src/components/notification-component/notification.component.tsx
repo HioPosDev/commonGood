@@ -35,6 +35,7 @@ const NotificationComponent: React.FC = () => {
     for (const path of possiblePaths) {
       try {
         await fetch(path);
+        console.log(`Archivo encontrado en la ruta ${path}`);
         return path;
       } catch (error) {
         console.warn(`No se encontró el archivo en la ruta ${path}`);
