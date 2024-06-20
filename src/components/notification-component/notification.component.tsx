@@ -1,42 +1,76 @@
-import React, { useEffect } from 'react';
-import { messaging } from '../../firebase'; // Asegúrate de que este path es correcto
-import { getToken, onMessage } from 'firebase/messaging';
+import React, { useEffect, useState } from 'react';
+
+const publicVapidKey = 'BI2Msr9HxqB9M4fU60Hwcmq2XoaJymfNQ2OAvVQ86XLag1bgzgFEreJNGLZ6PNwRTyzNCVAOrjn9gnZSJH6Pmtg';
 
 const NotificationComponent: React.FC = () => {
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [regist, setRegist] = useState<any>();
+
   useEffect(() => {
-    const requestPermission = async () => {
-      try {
-        // Pedir permiso para mostrar notificaciones
-        const permission = await Notification.requestPermission();
-        if (permission === 'granted') {
-          console.log('Notification permission granted.');
-
-          // Obtener el token de Firebase
-          const currentToken = await getToken(messaging, { vapidKey: 'TU_VAPID_PUBLIC_KEY' });
-          if (currentToken) {
-            console.log('Token:', currentToken);
-            // Enviar este token a tu servidor para suscribir el usuario a las notificaciones
-          } else {
-            console.log('No se obtuvo token.');
-          }
-        } else {
-          console.log('Unable to get permission to notify.');
-        }
-      } catch (err) {
-        console.log('Error al obtener permiso para notificaciones:', err);
-      }
-    };
-
-    requestPermission();
-
-    // Manejar mensajes entrantes mientras la aplicación está en primer plano
-    onMessage(messaging, (payload) => {
-      console.log('Mensaje recibido en primer plano:', payload);
-      // Aquí puedes mostrar una notificación personalizada
-    });
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./src/components/notification-component/sw.js')
+        .then(registration => {
+          setRegist(registration)
+          console.log('Service Worker registrado:', registration);
+        })
+        .catch(error => {
+          console.error('Error al registrar el Service Worker:', error);
+        });
+    }
   }, []);
 
-  return <div>Notificación Configurada</div>;
+  const urlBase64ToUint8Array = (base64String: string): Uint8Array => {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+  };
+
+  const subscribeUser = async () => {
+    console.log('HELLOOO 1!');
+
+    if (!('serviceWorker' in navigator)) {
+      console.log('Service Worker no está soportado en este navegador.');
+      return;
+    }
+
+    try {
+      // const registration = await navigator.serviceWorker.ready;
+      console.log('HELLOOO 2!');
+
+      const subscription = await regist.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+      });
+
+      console.log('HELLOOO 3!', subscription);
+
+      await fetch('http://87.106.125.61/npush/subscribe', {
+        method: 'POST',
+        body: JSON.stringify(subscription),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log('Usuario suscrito:', subscription);
+    } catch (error) {
+      console.error('Error al suscribir al usuario:', error);
+    }
+  };
+
+  return (
+    <div>
+      <button id="subscribeButton" onClick={subscribeUser}>
+        Suscribirse a Notificaciones
+      </button>
+    </div>
+  );
 };
 
 export default NotificationComponent;
