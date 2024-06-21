@@ -12,7 +12,7 @@ const NotificationComponent: React.FC = () => {
       const swPath = './sw.js';
       navigator.serviceWorker.register(swPath)
         .then(registration => {
-          setRegist(registration)
+          setRegist(registration);
           console.log('Service Worker registrado:', registration);
         })
         .catch(error => {
@@ -41,7 +41,6 @@ const NotificationComponent: React.FC = () => {
     }
 
     try {
-      // const registration = await navigator.serviceWorker.ready;
       console.log('HELLOOO 2!');
 
       const subscription = await regist.pushManager.subscribe({
@@ -51,7 +50,8 @@ const NotificationComponent: React.FC = () => {
 
       console.log('HELLOOO 3!', subscription);
 
-      await fetch('http://87.106.125.61/npush/subscribe', {
+      // Utiliza la ruta relativa para la solicitud
+      await fetch('/npush/subscribe', {  // <-- Aquí se cambia la URL
         method: 'POST',
         body: JSON.stringify(subscription),
         headers: {

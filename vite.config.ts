@@ -13,5 +13,14 @@ export default defineConfig({
         }
       ]
     })
-  ]
+  ],
+  server: {
+    proxy: {
+      '/npush': {
+        target: 'http://87.106.125.61',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/npush/, '')
+      }
+    }
+  }
 })
