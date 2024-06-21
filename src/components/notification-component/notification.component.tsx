@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const publicVapidKey = 'BI2Msr9HxqB9M4fU60Hwcmq2XoaJymfNQ2OAvVQ86XLag1bgzgFEreJNGLZ6PNwRTyzNCVAOrjn9gnZSJH6Pmtg';
@@ -12,7 +13,7 @@ const NotificationComponent: React.FC = () => {
       const swPath = './sw.js';
       navigator.serviceWorker.register(swPath)
         .then(registration => {
-          setRegist(registration);
+          setRegist(registration)
           console.log('Service Worker registrado:', registration);
         })
         .catch(error => {
@@ -41,6 +42,7 @@ const NotificationComponent: React.FC = () => {
     }
 
     try {
+      // const registration = await navigator.serviceWorker.ready;
       console.log('HELLOOO 2!');
 
       const subscription = await regist.pushManager.subscribe({
@@ -50,13 +52,16 @@ const NotificationComponent: React.FC = () => {
 
       console.log('HELLOOO 3!', subscription);
 
-      // Utiliza la ruta relativa para la solicitud
-      await fetch('/npush/subscribe', {  // <-- Aquí se cambia la URL
-        method: 'POST',
-        body: JSON.stringify(subscription),
+      axios.post('http://87.106.125.61/npush/subscribe', subscription, {
         headers: {
           'Content-Type': 'application/json'
         }
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
       });
 
       console.log('Usuario suscrito:', subscription);
