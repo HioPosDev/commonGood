@@ -1,19 +1,18 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useGeneralContext } from '../../context/generalContext';
 
 const publicVapidKey = 'BI2Msr9HxqB9M4fU60Hwcmq2XoaJymfNQ2OAvVQ86XLag1bgzgFEreJNGLZ6PNwRTyzNCVAOrjn9gnZSJH6Pmtg';
 
 const NotificationComponent: React.FC = () => {
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [regist, setRegist] = useState<any>();
+  const { registerHandler, register, setIsRegistered } = useGeneralContext();
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       const swPath = './sw.js';
       navigator.serviceWorker.register(swPath)
         .then(registration => {
-          setRegist(registration)
+          registerHandler(registration)
           console.log('Service Worker registrado:', registration);
         })
         .catch(error => {
@@ -34,31 +33,25 @@ const NotificationComponent: React.FC = () => {
   };
 
   const subscribeUser = async () => {
-    console.log('HELLOOO 1!');
-
     if (!('serviceWorker' in navigator)) {
       console.log('Service Worker no está soportado en este navegador.');
       return;
     }
 
     try {
-      // const registration = await navigator.serviceWorker.ready;
-      console.log('HELLOOO 2!');
-
-      const subscription = await regist.pushManager.subscribe({
+      const subscription = await register.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
       });
 
-      console.log('HELLOOO 3!', subscription);
-
-      axios.post('https://7829-2-154-226-93.ngrok-free.app/npush/subscribe', subscription, {
+      axios.post('https://4072-2-154-226-93.ngrok-free.app/npush/subscribe', subscription, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
       .then(response => {
         console.log(response.data);
+        setIsRegistered(true);
       })
       .catch(error => {
         console.error('Error:', error);
@@ -73,7 +66,7 @@ const NotificationComponent: React.FC = () => {
   return (
     <div>
       <button id="subscribeButton" onClick={subscribeUser}>
-        Suscribirse a Notificaciones
+        INICIAR PROCESO
       </button>
     </div>
   );
