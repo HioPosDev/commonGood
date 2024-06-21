@@ -44,7 +44,7 @@ const NotificationComponent: React.FC = () => {
         applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
       });
 
-      axios.post('https://4072-2-154-226-93.ngrok-free.app/npush/subscribe', subscription, {
+      axios.post('https://4072-2-154-226-93.ngrok-free.app/npush/subscribe?table=23', subscription, {
         headers: {
           'Content-Type': 'application/json'
         }
