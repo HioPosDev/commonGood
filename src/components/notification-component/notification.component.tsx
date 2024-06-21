@@ -52,7 +52,7 @@ const NotificationComponent: React.FC = () => {
 
       console.log('HELLOOO 3!', subscription);
 
-      axios.post('http://87.106.125.61/npush/subscribe', subscription, {
+      axios.post('https://7829-2-154-226-93.ngrok-free.app/npush/subscribe', subscription, {
         headers: {
           'Content-Type': 'application/json'
         }
