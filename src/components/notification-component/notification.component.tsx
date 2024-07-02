@@ -6,7 +6,7 @@ const publicVapidKey = 'BI2Msr9HxqB9M4fU60Hwcmq2XoaJymfNQ2OAvVQ86XLag1bgzgFEreJN
 
 const NotificationComponent: React.FC = () => {
   const { registerHandler, register, setIsRegistered } = useGeneralContext();
-
+  const PORT = 443;
 
   function getRandomInt(min: number, max: number) {
     // Asegurarse de que min y max sean enteros
@@ -53,7 +53,7 @@ const NotificationComponent: React.FC = () => {
         applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
       });
 
-      axios.post(`https://4072-2-154-226-93.ngrok-free.app/npush/subscribe?table=${getRandomInt(1,100)}`, subscription, {
+      axios.post(`https://commongood.hiopos.cloud:${PORT}/npush/subscribe?table=${getRandomInt(1,100)}`, subscription, {
         headers: {
           'Content-Type': 'application/json'
         }
