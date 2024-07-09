@@ -3,10 +3,19 @@ import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
 import { useGeneralContext } from '../../context/generalContext';
 import './notification.component.css'
+import AlertDialogSlide from '../dialog-component/dialog.component';
 
 const NotificationComponent: React.FC = () => {
   const { register, setIsRegistered, tableNumber, publicVapidKey } = useGeneralContext();
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
+  const [ openDialog, setOpenDialog ] = useState<boolean>(false);
+
+  const closeDialogHandler = (value: 'agree' | 'disagree') => {
+    setOpenDialog(false);
+    if (value === 'agree') {
+      setIsRegistered(true);
+    }
+  }
 
   const urlBase64ToUint8Array = (base64String: string): Uint8Array => {
     const padding = '='.repeat((4 - base64String.length % 4) % 4);
@@ -27,7 +36,7 @@ const NotificationComponent: React.FC = () => {
       return;
     }
 
-    if(tableNumber && publicVapidKey && register) {
+    if(tableNumber && tableNumber !== 0 && publicVapidKey && register) {
       try {
         const subscription = await register.pushManager.subscribe({
           userVisibleOnly: true,
@@ -51,8 +60,11 @@ const NotificationComponent: React.FC = () => {
         console.log('Usuario suscrito:', subscription);
       } catch (error) {
         console.error('Error al suscribir al usuario:', error);
+        console.log('Debe habilitar las notificaciones del navegador para continuar');
         setIsLoading(false);
       }
+    }else{
+      console.log('La mesa no existe');
     }
 
   };
@@ -69,9 +81,12 @@ const NotificationComponent: React.FC = () => {
       )}
 
       {!isLoading && (
-        <button id="subscribeButton" onClick={subscribeUser}>
-          ASIGNAR MESA
-        </button>
+        <>
+          <button id="subscribeButton" onClick={subscribeUser}>
+            ASIGNAR MESA
+          </button>
+          <AlertDialogSlide openDialog={openDialog} handleClose={closeDialogHandler} />
+        </>
       )}
 
     </div>

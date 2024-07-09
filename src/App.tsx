@@ -26,7 +26,6 @@ function App() {
      {
       compareStatusDate() ? (
           <div>
-            <h2>Mesa {tableNumber}</h2>
             <div className="card">
               {arrayValues.map(({ name, state }, index) => (
                 <div className='article' key={index}>
@@ -40,7 +39,9 @@ function App() {
             </footer>
         </div>
       ) : (
-        <NotificationComponent/>
+        <>
+        <NotificationComponent />
+        </>
       )
      }
     </div>
