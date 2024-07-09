@@ -62,6 +62,7 @@ const NotificationComponent: React.FC = () => {
         console.error('Error al suscribir al usuario:', error);
         console.log('Debe habilitar las notificaciones del navegador para continuar');
         setIsLoading(false);
+        setOpenDialog(true);
       }
     }else{
       console.log('La mesa no existe');
@@ -73,11 +74,13 @@ const NotificationComponent: React.FC = () => {
     <div>
 
       {isLoading && (
-        <ClipLoader
-        size={50}
-        color={"#123abc"}
-        loading={isLoading}
-        />
+        <div id="subscribeButton">
+          <ClipLoader
+            size={50}
+            color={"#123abc"}
+            loading={isLoading}
+          />    
+        </div>
       )}
 
       {!isLoading && (
