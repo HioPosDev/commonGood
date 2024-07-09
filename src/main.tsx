@@ -7,7 +7,7 @@ import {GeneralProvider} from './context/generalContext.tsx'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <GeneralProvider>
-    <App />
+      <App />
     </GeneralProvider>
   </React.StrictMode>,
 )

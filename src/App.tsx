@@ -1,9 +1,13 @@
 import './App.css';
 import NotificationComponent from './components/notification-component/notification.component';
 import { useGeneralContext } from './context/generalContext';
+import { useRegisterInfo } from './hooks/registerInfo.component';
 
 function App() {
-  const { register, isRegitered } = useGeneralContext();
+  useRegisterInfo();
+  const { tableNumber, isRegitered, register, publicVapidKey } = useGeneralContext();
+
+  const compareStatusDate = () => tableNumber && register && isRegitered && publicVapidKey;
 
   const arrayValues = [
     { name: 'primer plato', state: '1' },
@@ -15,10 +19,14 @@ function App() {
   return (
     <div className='app-container'>
       <h1>Common Good</h1>
+      <div className='table-title'>
+        <span className='table-name'>Mesa</span>
+        <span className='table-number'>{tableNumber}</span>
+      </div>
      {
-      register && isRegitered ? (
+      compareStatusDate() ? (
           <div>
-            <h2>Mesa 1</h2>
+            <h2>Mesa {tableNumber}</h2>
             <div className="card">
               {arrayValues.map(({ name, state }, index) => (
                 <div className='article' key={index}>

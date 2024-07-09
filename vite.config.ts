@@ -8,8 +8,8 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: 'sw.js', // El archivo que quieres copiar
-          dest: '' // La carpeta de destino (en este caso, la raíz de 'dist')
+          src: 'sw.js',
+          dest: ''
         }
       ]
     })
