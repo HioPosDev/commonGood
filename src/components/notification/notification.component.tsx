@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
 import { useGeneralContext } from '../../context/generalContext';
@@ -16,6 +16,16 @@ const NotificationComponent: React.FC = () => {
       setIsRegistered(true);
     }
   }
+
+  useEffect(() => {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        console.log('Permiso de notificaciones concedido');
+      } else {
+        console.log('Permiso de notificaciones denegado');
+      }
+    });
+  }, []);
 
   const urlBase64ToUint8Array = (base64String: string): Uint8Array => {
     const padding = '='.repeat((4 - base64String.length % 4) % 4);
@@ -38,6 +48,7 @@ const NotificationComponent: React.FC = () => {
 
     if(tableNumber && tableNumber !== 0 && publicVapidKey && register) {
       try {
+
         const subscription = await register.pushManager.subscribe({
           userVisibleOnly: true,
           applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
