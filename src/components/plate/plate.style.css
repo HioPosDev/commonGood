@@ -13,14 +13,10 @@
     width: 93%;
 }
 
-.plate-units {
-    margin-top: 0.5vh;
-    margin-bottom: 0.5vh;
-}
-
 .plate-name {
     font-size: 16px;
     font-weight: bold;
+    margin-bottom: 0.5vh;
 }
 
 .plate-state {
@@ -28,15 +24,16 @@
     font-size: 14px;
     padding: 5px 10px;
     border-radius: 5px;
-    color: #fff;
+    color: white;
+    font-weight: bold;
 }
 
 .state-1 {
-    background-color: orange; /* En cola */
+    background-color: rgb(175, 174, 172); /* En cola */
 }
 
 .state-2 {
-    background-color: blue; /* En preparación */
+    background-color: rgb(241, 184, 71); /* En preparación */
 }
 
 .state-3 {

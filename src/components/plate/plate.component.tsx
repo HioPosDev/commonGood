@@ -5,28 +5,38 @@ const Plate = ({ name, state, units }: {
     state: number;
     units: number; 
 }) => {
-    let stateClass = '';
+    let stateClass = {
+        state: '',
+        text: ''
+    };
 
     switch (state) {
         case 1:
-            stateClass = 'state-1';
+            stateClass = {
+                state: 'state-1',
+                text: 'Pendiente'
+            };
             break;
         case 2:
-            stateClass = 'state-2';
+            stateClass = {
+                state: 'state-1',
+                text: 'A preparación'
+            };
             break;
         case 3:
-            stateClass = 'state-3';
+            stateClass = {
+                state: 'state-1',
+                text: 'En preparación'
+            };
             break;
         default:
-            stateClass = '';
             break;
     }
 
     return (
         <div className="plate-container">
-            <span className="plate-name">{name}</span>
-            <span className='plate-units'>Unidades: {units}</span>
-            <span className={`plate-state ${stateClass}`}>{state === 1 ? 'En cola' : state === 2 ? 'En preparación' : 'Realizado'}</span>
+            <span className="plate-name">{units} - {name}</span>
+            <span className={`plate-state ${stateClass.state}`}>{stateClass.text}</span>
         </div>
     );
 };

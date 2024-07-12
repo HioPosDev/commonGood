@@ -30,9 +30,6 @@ function App() {
         </>
       )
      }
-     {/* <footer className="read-the-docs">
-              Developed by HioPos Cloudservices
-            </footer> */}
     </div>
   );
 }

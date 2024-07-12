@@ -28,41 +28,41 @@ const ProductsList: React.FC = () => {
 
 
     return (
-        <>
-        <p>Pedido en curso: </p>
-        <div className='products-list'>
-            {
-                products.length > 0 ? (
-                    <div>
-                        {
-                            products.map((plate: {
-                                Item: string;
-                                CodStatus: number;
-                                Uts: number;
-                            }) => {
-                                return (
-                                    <Plate name={plate.Item} state={plate.CodStatus} units={plate.Uts}/>
-                                )
-                            } )
-                        }
-                    </div>
-                ) : (
-                    <div>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <ClipLoader
-                            size={50}
-                            color={"#123abc"}
-                            // loading={isLoading}
-                        />   
-                    </div>
-                )
-            }
+        <div>
+            <p className='products-title'>Pedido en curso: </p>
+            <div className='products-list'>
+                {
+                    products.length > 0 ? (
+                        <div>
+                            {
+                                products.map((plate: {
+                                    Item: string;
+                                    CodStatus: number;
+                                    Uts: number;
+                                }) => {
+                                    return (
+                                        <Plate name={plate.Item} state={plate.CodStatus} units={plate.Uts}/>
+                                    )
+                                } )
+                            }
+                        </div>
+                    ) : (
+                        <div>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <ClipLoader
+                                size={50}
+                                color={"#123abc"}
+                                // loading={isLoading}
+                            />   
+                        </div>
+                    )
+                }
+            </div>
         </div>
-        </>
     );
 };
 

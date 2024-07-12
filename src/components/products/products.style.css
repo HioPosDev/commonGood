@@ -1,11 +1,18 @@
 .products-list {
     /* margin-top: 1vh; */
-    max-height: 60vh; 
+    max-height: 85vh; 
     overflow-y: auto; 
     overflow-x: hidden; 
     width: 100%;
+    /* border: 1px solid black; */
+    border-radius: 1%;
 }
   
 .products-list > div {
     padding: 1rem;  
+    background-color: rgb(253, 253, 253);
+}
+
+.products-title {
+    font-weight: bold;
 }

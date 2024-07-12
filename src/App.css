@@ -8,6 +8,7 @@
 
 .app-container {
   /* border: 2px solid red; */
+  width: 100%;
 }
 
 .card {
@@ -60,12 +61,5 @@
 .header-1 {
   display: flex;
   justify-content: space-around;
-}
-
-footer {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  padding: 1vh;
-  width: 100%;
+  margin-bottom: -2vh;
 }
