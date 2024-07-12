@@ -11,8 +11,17 @@ export const useRegisterInfo = () => {
           const swPath = './sw.js';
           navigator.serviceWorker.register(swPath)
             .then(registration => {
-              registerHandler(registration)
+              registerHandler(registration);
               console.log('Service Worker registrado:', registration);
+
+              // Solicitar permisos para notificaciones
+              Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                  console.log('Permiso de notificaciones concedido');
+                } else {
+                  console.log('Permiso de notificaciones denegado');
+                }
+              });
             })
             .catch(error => {
               console.error('Error al registrar el Service Worker:', error);
@@ -36,5 +45,4 @@ export const useRegisterInfo = () => {
         const room = queryParams.get('room');
         numberTableHandler(Number(room), Number(table));
     }, [numberTableHandler, publicVapidKeyHandler, register]);
- 
 }
