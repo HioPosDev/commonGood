@@ -19,13 +19,13 @@ const Plate = ({ name, state, units }: {
             break;
         case 2:
             stateClass = {
-                state: 'state-1',
+                state: 'state-2',
                 text: 'A preparación'
             };
             break;
         case 3:
             stateClass = {
-                state: 'state-1',
+                state: 'state-3',
                 text: 'En preparación'
             };
             break;
