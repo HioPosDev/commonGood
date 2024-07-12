@@ -1,0 +1,36 @@
+.plate-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    position: relative;
+    background-color: #f9f9f9;
+}
+
+.plate-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.plate-state {
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.state-1 {
+    background-color: orange; /* En cola */
+}
+
+.state-2 {
+    background-color: blue; /* En preparación */
+}
+
+.state-3 {
+    background-color: green; /* Realizado */
+}

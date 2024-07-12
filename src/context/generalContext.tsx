@@ -7,7 +7,8 @@ interface GeneralContextType {
   setIsRegistered: (value: boolean) => void;
   registerHandler: (value: any) => void;
   tableNumber: number | undefined;
-  numberTableHandler: (value: number) => void;
+  numberTableHandler: (room: number, table: number) => void;
+  roomNumber: number | undefined;
   publicVapidKey: string | undefined;
   publicVapidKeyHandler: (value: string) => void;
 }
@@ -18,14 +19,16 @@ export const GeneralProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [register, setRegister] = useState<any>();
   const [isRegitered, setIsRegistered] = useState<boolean>(false);
   const [tableNumber, setTableNumber] = useState<number | undefined>();
+  const [roomNumber, setRoomNumber] = useState<number | undefined>();
   const [publicVapidKey, setPublicVapidKey] = useState<string | undefined>();
 
   const registerHandler = (value: any) => {
     setRegister(value);
   };
 
-  const numberTableHandler = (value: number): void => {
-    setTableNumber(value)
+  const numberTableHandler = (room: number, table: number): void => {
+    setTableNumber(table);
+    setRoomNumber(room);
   }
 
   const publicVapidKeyHandler = (value: string): void => {
@@ -33,7 +36,7 @@ export const GeneralProvider: React.FC<{ children: React.ReactNode }> = ({ child
   }
 
   return (
-    <GeneralContext.Provider value={{ register, registerHandler, isRegitered, setIsRegistered, tableNumber, numberTableHandler, publicVapidKey, publicVapidKeyHandler }}>
+    <GeneralContext.Provider value={{ register, registerHandler, isRegitered, setIsRegistered, tableNumber, numberTableHandler, publicVapidKey, publicVapidKeyHandler, roomNumber }}>
       {children}
     </GeneralContext.Provider>
   );

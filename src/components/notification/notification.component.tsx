@@ -3,10 +3,10 @@ import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
 import { useGeneralContext } from '../../context/generalContext';
 import './notification.component.css'
-import AlertDialogSlide from '../dialog-component/dialog.component';
+import AlertDialogSlide from '../dialog/dialog.component';
 
 const NotificationComponent: React.FC = () => {
-  const { register, setIsRegistered, tableNumber, publicVapidKey } = useGeneralContext();
+  const { register, setIsRegistered, tableNumber, publicVapidKey, roomNumber } = useGeneralContext();
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ openDialog, setOpenDialog ] = useState<boolean>(false);
 
@@ -43,7 +43,7 @@ const NotificationComponent: React.FC = () => {
           applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
         });
 
-        axios.post(`https://commongood.hiopos.cloud/npush/subscribe?table=${tableNumber}`, subscription, {
+        axios.post(`https://commongood.hiopos.cloud/npush/subscribe?table=${tableNumber}&room=${roomNumber}`, subscription, {
           headers: {
             'Content-Type': 'application/json'
           }

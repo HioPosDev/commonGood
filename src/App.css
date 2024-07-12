@@ -27,7 +27,8 @@
 
 .table-title {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .table-number {
@@ -38,4 +39,17 @@
 .table-name {
   font-size: 3vh;
   font-weight: bold;
+}
+
+.logo {
+  width: 20vh;
+  height: auto;
+}
+
+footer {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  padding: 1vh;
+  width: 100%;
 }

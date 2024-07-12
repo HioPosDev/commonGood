@@ -33,7 +33,8 @@ export const useRegisterInfo = () => {
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
         const table = queryParams.get('table');
-        numberTableHandler(Number(table));
+        const room = queryParams.get('room');
+        numberTableHandler(Number(room), Number(table));
     }, [numberTableHandler, publicVapidKeyHandler, register]);
  
 }
