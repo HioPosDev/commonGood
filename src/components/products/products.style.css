@@ -1,9 +1,10 @@
 .products-list {
-    margin-top: 3vh;
-    max-height: 80vh; /* Limitar la altura máxima para que se pueda hacer scroll dentro de este contenedor */
-    overflow-y: auto; /* Mostrar scroll vertical solo cuando el contenido exceda la altura máxima */
-    overflow-x: hidden; /* Ocultar scroll horizontal si no es necesario */
-  }
+    /* margin-top: 1vh; */
+    max-height: 60vh; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    width: 100%;
+}
   
 .products-list > div {
     padding: 1rem;  

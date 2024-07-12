@@ -1,8 +1,9 @@
 import './plate.style.css';
 
-const Plate = ({ name, state }: {
+const Plate = ({ name, state, units }: {
     name: string;
     state: number;
+    units: number; 
 }) => {
     let stateClass = '';
 
@@ -24,6 +25,7 @@ const Plate = ({ name, state }: {
     return (
         <div className="plate-container">
             <span className="plate-name">{name}</span>
+            <span className='plate-units'>Unidades: {units}</span>
             <span className={`plate-state ${stateClass}`}>{state === 1 ? 'En cola' : state === 2 ? 'En preparación' : 'Realizado'}</span>
         </div>
     );

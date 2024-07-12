@@ -1,6 +1,7 @@
 .plate-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
     padding: 10px;
     border: 1px solid #ccc;
@@ -9,6 +10,12 @@
     font-family: Arial, sans-serif;
     position: relative;
     background-color: #f9f9f9;
+    width: 93%;
+}
+
+.plate-units {
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
 }
 
 .plate-name {
@@ -17,6 +24,7 @@
 }
 
 .plate-state {
+    width: 93%;
     font-size: 14px;
     padding: 5px 10px;
     border-radius: 5px;
