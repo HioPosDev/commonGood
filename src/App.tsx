@@ -8,7 +8,7 @@ function App() {
   useRegisterInfo();
   const { tableNumber, isRegitered, register, publicVapidKey } = useGeneralContext();
 
-  const compareStatusDate = () => tableNumber && register && isRegitered && publicVapidKey;
+  const compareStatusDate = () => tableNumber !== 0 && register && isRegitered && publicVapidKey;
 
   return (
     <div className='app-container'>
@@ -26,7 +26,7 @@ function App() {
             <ProductsList />
       ) : (
         <>
-        <NotificationComponent />
+          <NotificationComponent />
         </>
       )
      }

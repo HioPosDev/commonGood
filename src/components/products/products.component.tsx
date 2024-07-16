@@ -12,7 +12,7 @@ const ProductsList: React.FC = () => {
 
     const getProducts = async () => {
         try {
-            const { data } = await axios.get(`https://commongood.hiopos.cloud/npush/gethiodata?table=${tableNumber}&room=${roomNumber}`);
+            const { data } = await axios.get(`${process.env.REACT_APP_API}gethiodata?table=${tableNumber}&room=${roomNumber}`);
             setProducts(data);
         } catch (error) {
             console.log(error);

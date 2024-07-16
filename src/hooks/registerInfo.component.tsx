@@ -35,7 +35,7 @@ export const useRegisterInfo = () => {
     }, [register, registerHandler]);
 
     useEffect(() => {
-        axios.get("https://commongood.hiopos.cloud/npush/getPublicVapid")
+        axios.get(`${process.env.REACT_APP_API}getPublicVapid`)
             .then(res => {
                 console.log('publicvapid -> ', res.data.keys);
                 publicVapidKeyHandler(res?.data?.keys ?? '')

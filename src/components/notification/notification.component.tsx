@@ -54,7 +54,7 @@ const NotificationComponent: React.FC = () => {
           applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
         });
 
-        axios.post(`https://commongood.hiopos.cloud/npush/subscribe?table=${tableNumber}&room=${roomNumber}`, subscription, {
+        axios.post(`${process.env.REACT_APP_API}subscribe?table=${tableNumber}&room=${roomNumber}`, subscription, {
           headers: {
             'Content-Type': 'application/json'
           }
