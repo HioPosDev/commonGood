@@ -54,7 +54,7 @@ const NotificationComponent: React.FC = () => {
           applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
         });
 
-        axios.post(`${process.env.REACT_APP_API}subscribe?table=${tableNumber}&room=${roomNumber}`, subscription, {
+        axios.post(`${process.env.REACT_APP_API_URL}subscribe?table=${tableNumber}&room=${roomNumber}`, subscription, {
           headers: {
             'Content-Type': 'application/json'
           }

@@ -35,7 +35,7 @@ export const useRegisterInfo = () => {
     }, [register, registerHandler]);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API}getPublicVapid`)
+        axios.get(`${process.env.REACT_APP_API_URL}getPublicVapid`)
             .then(res => {
                 console.log('publicvapid -> ', res.data.keys);
                 publicVapidKeyHandler(res?.data?.keys ?? '')
