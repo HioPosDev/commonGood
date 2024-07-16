@@ -13,6 +13,8 @@ export const useRegisterInfo = () => {
             } else {
                 console.log('Permiso de notificaciones denegado');
             }
+        } else {
+            console.error("Can not accept notifications");
         }
     };
 
