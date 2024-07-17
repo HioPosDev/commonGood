@@ -11,6 +11,8 @@ interface GeneralContextType {
   roomNumber: number | undefined;
   publicVapidKey: string | undefined;
   publicVapidKeyHandler: (value: string) => void;
+  setiOSDevice: (value: boolean) => void;
+  iOSDevice: boolean | undefined;
 }
 
 const GeneralContext = createContext<GeneralContextType | undefined>(undefined);
@@ -21,6 +23,7 @@ export const GeneralProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [tableNumber, setTableNumber] = useState<number | undefined>();
   const [roomNumber, setRoomNumber] = useState<number | undefined>();
   const [publicVapidKey, setPublicVapidKey] = useState<string | undefined>();
+  const [iOSDevice, setiOSDevice] = useState<boolean | undefined>();
 
   const registerHandler = (value: any) => {
     setRegister(value);
@@ -36,7 +39,7 @@ export const GeneralProvider: React.FC<{ children: React.ReactNode }> = ({ child
   }
 
   return (
-    <GeneralContext.Provider value={{ register, registerHandler, isRegitered, setIsRegistered, tableNumber, numberTableHandler, publicVapidKey, publicVapidKeyHandler, roomNumber }}>
+    <GeneralContext.Provider value={{ register, registerHandler, isRegitered, setIsRegistered, tableNumber, numberTableHandler, publicVapidKey, publicVapidKeyHandler, roomNumber, iOSDevice, setiOSDevice }}>
       {children}
     </GeneralContext.Provider>
   );

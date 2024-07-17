@@ -3,16 +3,10 @@ import { useGeneralContext } from '../context/generalContext';
 import { useEffect } from 'react';
 
 export const useRegisterInfo = () => {
-    const { numberTableHandler, publicVapidKeyHandler, register, registerHandler } = useGeneralContext();
-
-    const platform = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const agent = navigator;
-
-    console.log('PLATFORM -> ', platform);
-    console.log('NAVIGATOR -> ', agent);
+    const { numberTableHandler, publicVapidKeyHandler, register, registerHandler, setiOSDevice, iOSDevice } = useGeneralContext();
 
     const requestNotificationPermission = async () => {
-        if(!platform){
+        if(!iOSDevice){
             if ('Notification' in window && 'serviceWorker' in navigator) {
                 const permission = await Notification.requestPermission();
                 if (permission === 'granted') {
@@ -54,6 +48,7 @@ export const useRegisterInfo = () => {
 
     // Obtener información necesaria para trabajar con el backend
     useEffect(() => {
+        setiOSDevice(/iPad|iPhone|iPod/.test(navigator.userAgent));
         const queryParams = new URLSearchParams(window.location.search);
         const table = queryParams.get('table');
         const room = queryParams.get('room');

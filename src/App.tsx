@@ -6,9 +6,9 @@ import { useRegisterInfo } from './hooks/registerInfo.component';
 
 function App() {
   useRegisterInfo();
-  const { tableNumber, isRegitered, register, publicVapidKey } = useGeneralContext();
+  const { tableNumber, isRegitered, register, publicVapidKey, iOSDevice } = useGeneralContext();
 
-  const compareStatusDate = () => tableNumber !== 0 && register && isRegitered && publicVapidKey;
+  const compareStatusDate = () => tableNumber !== 0 && register && isRegitered && publicVapidKey || iOSDevice ;
 
   return (
     <div className='app-container'>
