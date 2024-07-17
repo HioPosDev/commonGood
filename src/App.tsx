@@ -10,9 +10,6 @@ function App() {
 
   const compareStatusDate = () => tableNumber !== 0 && register && isRegitered && publicVapidKey;
 
-  console.log('PERE -> ', process.env.REACT_APP_API_URL);
-  
-
   return (
     <div className='app-container'>
       <div className={`header-${compareStatusDate() ? '1' : '2'}`}>
