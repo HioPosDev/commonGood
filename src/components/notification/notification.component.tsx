@@ -6,7 +6,7 @@ import './notification.component.css'
 import AlertDialogSlide from '../dialog/dialog.component';
 
 const NotificationComponent: React.FC = () => {
-  const { register, setIsRegistered, tableNumber, publicVapidKey, roomNumber } = useGeneralContext();
+  const { register, setIsRegistered, tableNumber, publicVapidKey, roomNumber, iOSDevice } = useGeneralContext();
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ openDialog, setOpenDialog ] = useState<boolean>(false);
 
@@ -18,13 +18,15 @@ const NotificationComponent: React.FC = () => {
   }
 
   useEffect(() => {
-    Notification.requestPermission().then(permission => {
-      if (permission === 'granted') {
-        console.log('Permiso de notificaciones concedido');
-      } else {
-        console.log('Permiso de notificaciones denegado');
-      }
-    });
+    if(!iOSDevice){
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          console.log('Permiso de notificaciones concedido');
+        } else {
+          console.log('Permiso de notificaciones denegado');
+        }
+      });
+    }
   }, []);
 
   const urlBase64ToUint8Array = (base64String: string): Uint8Array => {
