@@ -6,7 +6,7 @@ import './notification.component.css'
 import AlertDialogSlide from '../dialog/dialog.component';
 
 const NotificationComponent: React.FC = () => {
-  const { register, setIsRegistered, tableNumber, publicVapidKey, roomNumber, iOSDevice } = useGeneralContext();
+  const { register, setIsRegistered, tableNumber, publicVapidKey, roomNumber } = useGeneralContext();
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ openDialog, setOpenDialog ] = useState<boolean>(false);
 
@@ -18,7 +18,7 @@ const NotificationComponent: React.FC = () => {
   }
 
   useEffect(() => {
-    if(!iOSDevice){
+    if(!/iPad|iPhone|iPod/.test(navigator.userAgent)){
       Notification.requestPermission().then(permission => {
         if (permission === 'granted') {
           console.log('Permiso de notificaciones concedido');

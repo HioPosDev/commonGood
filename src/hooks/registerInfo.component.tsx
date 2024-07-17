@@ -3,10 +3,10 @@ import { useGeneralContext } from '../context/generalContext';
 import { useEffect } from 'react';
 
 export const useRegisterInfo = () => {
-    const { numberTableHandler, publicVapidKeyHandler, register, registerHandler, setiOSDevice, iOSDevice } = useGeneralContext();
+    const { numberTableHandler, publicVapidKeyHandler, register, registerHandler, setiOSDevice } = useGeneralContext();
 
     const requestNotificationPermission = async () => {
-        if(!iOSDevice){
+        if(!/iPad|iPhone|iPod/.test(navigator.userAgent)){
             if ('Notification' in window && 'serviceWorker' in navigator) {
                 const permission = await Notification.requestPermission();
                 if (permission === 'granted') {
