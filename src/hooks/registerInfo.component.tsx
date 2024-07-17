@@ -39,7 +39,7 @@ export const useRegisterInfo = () => {
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}getPublicVapid`)
             .then(res => {
-                publicVapidKeyHandler(res?.data?.keys ?? '');
+                publicVapidKeyHandler(res.data.keys ?? '');
             })
             .catch(err => {
                 throw new Error(err);
