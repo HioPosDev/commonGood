@@ -28,7 +28,7 @@ export const useRegisterInfo = () => {
                     registerHandler(registration);
                     console.log('Service Worker registrado:', registration);
 
-                    requestNotificationPermission();
+                    !/iPad|iPhone|iPod/.test(navigator.userAgent) && requestNotificationPermission();
                 })
                 .catch(error => {
                     console.error('Error al registrar el Service Worker:', error);
