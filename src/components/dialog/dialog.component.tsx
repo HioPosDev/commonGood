@@ -41,8 +41,8 @@ export default function AlertDialogSlide({openDialog, handleClose}: {
             </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleClose('disagree')}>Disagree</Button>
-          <Button onClick={() => handleClose('agree')}>Agree</Button>
+          <Button onClick={() => handleClose('disagree')}>Cancelar</Button>
+          <Button onClick={() => handleClose('agree')}>Continuar</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

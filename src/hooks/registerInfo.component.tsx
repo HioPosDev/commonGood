@@ -5,6 +5,16 @@ import { useEffect } from 'react';
 export const useRegisterInfo = () => {
     const { numberTableHandler, publicVapidKeyHandler, register, registerHandler, setiOSDevice } = useGeneralContext();
 
+    useEffect(() => {
+        if ('caches' in window) {
+            caches.keys().then(function (cacheNames) {
+              cacheNames.forEach(function (cacheName) {
+                caches.delete(cacheName);
+              });
+            });
+          }  
+    }, [])
+
     const requestNotificationPermission = async () => {
         if(!/iPad|iPhone|iPod/.test(navigator.userAgent)){
             if ('Notification' in window && 'serviceWorker' in navigator) {
@@ -21,18 +31,20 @@ export const useRegisterInfo = () => {
     };
 
     useEffect(() => {
-        if ('serviceWorker' in navigator) {
-            const swPath = './sw.js';
-            navigator.serviceWorker.register(swPath)
-                .then(registration => {
-                    registerHandler(registration);
-                    console.log('Service Worker registrado:', registration);
-
-                    !/iPad|iPhone|iPod/.test(navigator.userAgent) && requestNotificationPermission();
-                })
-                .catch(error => {
-                    console.error('Error al registrar el Service Worker:', error);
-                });
+        if(!/iPad|iPhone|iPod/.test(navigator.userAgent)){
+            if ('Notification' in window && 'serviceWorker' in navigator) {
+                const swPath = './sw.js';
+                navigator.serviceWorker.register(swPath)
+                    .then(registration => {
+                        registerHandler(registration);
+                        console.log('Service Worker registrado:', registration);
+    
+                        requestNotificationPermission();
+                    })
+                    .catch(error => {
+                        console.error('Error al registrar el Service Worker:', error);
+                    });
+            }
         }
     }, [register, registerHandler]);
 
