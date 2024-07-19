@@ -3,7 +3,7 @@ import { useGeneralContext } from '../context/generalContext';
 import { useEffect } from 'react';
 
 export const useRegisterInfo = () => {
-    const { numberTableHandler, publicVapidKeyHandler, register, registerHandler, setiOSDevice } = useGeneralContext();
+    const { numberTableHandler, publicVapidKeyHandler, register, registerHandler } = useGeneralContext();
 
     useEffect(() => {
         if ('caches' in window) {
@@ -58,9 +58,7 @@ export const useRegisterInfo = () => {
             });
     }, [publicVapidKeyHandler]);
 
-    // Obtener información necesaria para trabajar con el backend
     useEffect(() => {
-        setiOSDevice(/iPad|iPhone|iPod/.test(navigator.userAgent));
         const queryParams = new URLSearchParams(window.location.search);
         const table = queryParams.get('table');
         const room = queryParams.get('room');

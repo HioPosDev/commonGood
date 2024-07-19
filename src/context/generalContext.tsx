@@ -3,7 +3,7 @@ import React, { createContext, useState, useContext } from 'react';
 
 interface GeneralContextType {
   register: any;
-  isRegitered: boolean;
+  isRegistered: boolean;
   setIsRegistered: (value: boolean) => void;
   registerHandler: (value: any) => void;
   tableNumber: number | undefined;
@@ -11,19 +11,19 @@ interface GeneralContextType {
   roomNumber: number | undefined;
   publicVapidKey: string | undefined;
   publicVapidKeyHandler: (value: string) => void;
-  setiOSDevice: (value: boolean) => void;
-  iOSDevice: boolean | undefined;
+  notificationsAccepted: boolean;
+  setNotificationsAccepted: (value: boolean) => void;
 }
 
 const GeneralContext = createContext<GeneralContextType | undefined>(undefined);
 
 export const GeneralProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [register, setRegister] = useState<any>();
-  const [isRegitered, setIsRegistered] = useState<boolean>(false);
+  const [isRegistered, setIsRegistered] = useState<boolean>(false);
   const [tableNumber, setTableNumber] = useState<number | undefined>();
   const [roomNumber, setRoomNumber] = useState<number | undefined>();
   const [publicVapidKey, setPublicVapidKey] = useState<string | undefined>();
-  const [iOSDevice, setiOSDevice] = useState<boolean | undefined>();
+  const [notificationsAccepted, setNotificationsAccepted] = useState<boolean>(false);
 
   const registerHandler = (value: any) => {
     setRegister(value);
@@ -39,7 +39,7 @@ export const GeneralProvider: React.FC<{ children: React.ReactNode }> = ({ child
   }
 
   return (
-    <GeneralContext.Provider value={{ register, registerHandler, isRegitered, setIsRegistered, tableNumber, numberTableHandler, publicVapidKey, publicVapidKeyHandler, roomNumber, iOSDevice, setiOSDevice }}>
+    <GeneralContext.Provider value={{ notificationsAccepted, setNotificationsAccepted, register, registerHandler, isRegistered, setIsRegistered, tableNumber, numberTableHandler, publicVapidKey, publicVapidKeyHandler, roomNumber }}>
       {children}
     </GeneralContext.Provider>
   );

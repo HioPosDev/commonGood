@@ -4,11 +4,14 @@ import { useGeneralContext } from '../../context/generalContext';
 import Plate from '../plate/plate.component';
 import './products.style.css'
 import { ClipLoader } from 'react-spinners';
+import alertIcon from './notification_4418844.png'
+import AlertNotificationsDialogSlide from '../dialog/dialog-alert.component';
 
 const ProductsList: React.FC = () => {
     
-    const {tableNumber, roomNumber } = useGeneralContext();
+    const {tableNumber, roomNumber, notificationsAccepted } = useGeneralContext();
     const [products, setProducts] = useState([]);
+    const [openDialog, setOpenDialog] = useState(false);
 
     const getProducts = async () => {
         try {
@@ -25,11 +28,25 @@ const ProductsList: React.FC = () => {
         return () => clearInterval(interval);
     }, [tableNumber, roomNumber])
 
-
+    const closeDialogHandler = () => {
+        setOpenDialog(false);
+    }
 
     return (
         <div>
-            <p className='products-title'>Pedido en curso: </p>
+            <div className='products-title-with-alerts'>
+                {
+                    !notificationsAccepted && (
+                        <>
+                            <button className='products-alert' type='button' onClick={() => setOpenDialog(true)}>
+                                <img className='products-alertIcon' src={alertIcon} alt="test" />
+                            </button>
+                            <AlertNotificationsDialogSlide openDialog={openDialog} handleClose={closeDialogHandler} />
+                        </>
+                    )
+                }
+                <p className={`products-title-${notificationsAccepted ? '1' : '2'}`}>Pedido en curso: </p>
+            </div>
             <div className='products-list'>
                 {
                     products.length > 0 ? (

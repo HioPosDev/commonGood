@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './App.css';
 import NotificationComponent from './components/notification/notification.component';
 import ProductsList from './components/products/products.component';
@@ -6,9 +7,15 @@ import { useRegisterInfo } from './hooks/registerInfo.component';
 
 function App() {
   useRegisterInfo();
-  const { tableNumber, isRegitered, register, publicVapidKey, iOSDevice } = useGeneralContext();
+  const { tableNumber, isRegistered, register, publicVapidKey, setNotificationsAccepted } = useGeneralContext();
 
-  const compareStatusDate = () => tableNumber !== 0 && register && isRegitered && publicVapidKey || iOSDevice ;
+  const compareStatusDate = () => tableNumber !== 0 && register && isRegistered && publicVapidKey || /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+  useEffect(() => {
+    if(/iPad|iPhone|iPod/.test(navigator.userAgent)){
+      setNotificationsAccepted(false);
+    }
+  }, [])
 
   return (
     <div className='app-container'>

@@ -6,7 +6,7 @@ import './notification.component.css'
 import AlertDialogSlide from '../dialog/dialog.component';
 
 const NotificationComponent: React.FC = () => {
-  const { register, setIsRegistered, tableNumber, publicVapidKey, roomNumber } = useGeneralContext();
+  const { register, setIsRegistered, tableNumber, publicVapidKey, roomNumber, setNotificationsAccepted } = useGeneralContext();
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ openDialog, setOpenDialog ] = useState<boolean>(false);
 
@@ -65,6 +65,7 @@ const NotificationComponent: React.FC = () => {
           console.log(response.data);
           setIsRegistered(true);
           setIsLoading(false);
+          setNotificationsAccepted(true);
         })
         .catch(error => {
           console.error('Error:', error);

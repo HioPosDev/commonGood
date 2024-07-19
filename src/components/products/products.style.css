@@ -7,12 +7,34 @@
     /* border: 1px solid black; */
     border-radius: 1%;
 }
+
+.products-alert {
+    all: unset;
+    display: inline;
+    width: 2rem;
+    height: auto;
+}
+
+.products-alertIcon {
+    width: 100%
+}
+
+.products-title-with-alerts {
+    display: flex;
+    flex-direction: row;
+}
   
 .products-list > div {
     padding: 1rem;  
     background-color: rgb(253, 253, 253);
 }
 
-.products-title {
+.products-title-1 {
     font-weight: bold;
+    width: 100%;
+}
+
+.products-title-2 {
+    font-weight: bold;
+    width: 85%;
 }
