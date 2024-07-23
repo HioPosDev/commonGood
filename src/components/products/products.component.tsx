@@ -50,7 +50,7 @@ const ProductsList: React.FC = () => {
             <div className='products-list'>
                 {
                     products.length > 0 ? (
-                        <div>
+                        <div className='products-plate-list'>
                             {
                                 products.map((plate: {
                                     Item: string;

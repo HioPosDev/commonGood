@@ -1,6 +1,6 @@
 .plate-container {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: flex-start;
     justify-content: space-between;
     padding: 10px;
@@ -14,13 +14,14 @@
 }
 
 .plate-name {
+    width: 70%;
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 0.5vh;
 }
 
 .plate-state {
-    width: 93%;
+    width: 30%;
     font-size: 14px;
     padding: 5px 10px;
     border-radius: 5px;
