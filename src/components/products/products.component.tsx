@@ -78,6 +78,7 @@ const ProductsList: React.FC = () => {
                         </div>
                     )
                 }
+                <div className="test"></div>
             </div>
         </div>
     );
