@@ -12,11 +12,13 @@ const ProductsList: React.FC = () => {
     const {tableNumber, roomNumber, notificationsAccepted } = useGeneralContext();
     const [products, setProducts] = useState([]);
     const [openDialog, setOpenDialog] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const getProducts = async () => {
         try {
             const { data } = await axios.get(`${process.env.REACT_APP_API_URL}gethiodata?table=${tableNumber}&room=${roomNumber}`);
             setProducts(data);
+            setIsLoading(false);
         } catch (error) {
             console.log(error);
         }
@@ -48,22 +50,9 @@ const ProductsList: React.FC = () => {
                 <p className={`products-title-${notificationsAccepted ? '1' : '2'}`}>Pedido en curso: </p>
             </div>
             <div className='products-list'>
+
                 {
-                    products.length > 0 ? (
-                        <div className='products-plate-list'>
-                            {
-                                products.map((plate: {
-                                    Item: string;
-                                    CodStatus: number;
-                                    Uts: number;
-                                }) => {
-                                    return (
-                                        <Plate name={plate.Item} state={plate.CodStatus} units={plate.Uts}/>
-                                    )
-                                } )
-                            }
-                        </div>
-                    ) : (
+                    isLoading && (
                         <div>
                             <br />
                             <br />
@@ -78,6 +67,33 @@ const ProductsList: React.FC = () => {
                         </div>
                     )
                 }
+
+                {
+                    !isLoading && !(products.length > 0) && (
+                        <div className='products-plate-list'>
+                            <p>No hay productos asociados a esta mesa</p>
+                        </div>
+                    )
+                }
+
+                {
+                    !isLoading && products.length > 0 && (
+                        <div className='products-plate-list'>
+                            {
+                                products.map((plate: {
+                                    Item: string;
+                                    CodStatus: number;
+                                    Uts: number;
+                                }) => {
+                                    return (
+                                        <Plate name={plate.Item} state={plate.CodStatus} units={plate.Uts}/>
+                                    )
+                                } )
+                            }
+                        </div>
+                    )
+                }
+                
                 <div className="test"></div>
             </div>
         </div>
